@@ -39,6 +39,7 @@ def daylighthours(lat, lng, startdate=None, enddate=None):
 
 
 def timerange(enddate, startdate):
+    ''' datetime to Stellarium dates'''
     if startdate is None:
         t0 = ts.now()
     else:
@@ -55,6 +56,7 @@ def timerange(enddate, startdate):
 
 
 def ramadan_dates(year):
+    ''' Gregorian dates of Ramadan during a given Gregorian year'''
     h = Gregorian(year, 1, 1).to_hijri()
     if h.month > 9:
         year = h.year - 1
@@ -71,6 +73,7 @@ def ramadan_dates(year):
 
 
 def ramadan_daylight_hours(lat, lng, year):
+    ''' daylight hours for each day of Ramadam in a given year '''
     start, end = ramadan_dates(year)
     end += timedelta(days=1)  # avoid off by 1 error
     hours = daylighthours(lat, lng, startdate=start.strftime('%x'), enddate=end.strftime('%x'))
